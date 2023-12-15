@@ -8,43 +8,64 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ExternalLink } from '../../../../components/ExternalLink'
 import { PostHeaderContainer } from './styles'
 import { useNavigate } from 'react-router-dom'
+import { IPost } from '../../../Blog'
+import { Spinner } from '../../../../components/Spinner'
+import { relativeDateFormater } from '../../../../utils/formater'
 
-export function PostHeader() {
+interface PostHeaderProps {
+  postData: IPost
+  isLoad: boolean
+}
+
+export function PostHeader({ postData, isLoad }: PostHeaderProps) {
   const navigate = useNavigate()
 
   function goBack() {
     navigate(-1)
   }
 
+  const formatedDate = relativeDateFormater(postData?.created_at)
+
   return (
     <PostHeaderContainer>
-      <header>
-        <ExternalLink
-          as="button"
-          onClick={goBack}
-          icon={<FontAwesomeIcon icon={faChevronLeft} />}
-          text="Voltar"
-          variant="iconLeft"
-        />
-        <ExternalLink text="Ver no GitHub" href="#" target="_blank" />
-      </header>
+      {isLoad ? (
+        <Spinner />
+      ) : (
+        <>
+          <header>
+            <ExternalLink
+              as="button"
+              onClick={goBack}
+              icon={<FontAwesomeIcon icon={faChevronLeft} />}
+              text="Voltar"
+              variant="iconLeft"
+            />
+            <ExternalLink
+              text="Ver no GitHub"
+              href={postData.html_url}
+              target="_blank"
+            />
+          </header>
 
-      <h1>JavaScript data types and data structures</h1>
-      <ul>
-        <li>
-          <FontAwesomeIcon icon={faGithub} />
-          GuilhermeJSales
-        </li>
+          <h1>{postData.title}</h1>
+          <ul>
+            <li>
+              <FontAwesomeIcon icon={faGithub} />
+              {postData.user.login}
+            </li>
 
-        <li>
-          <FontAwesomeIcon icon={faCalendarDay} />
-          Há 1 dia
-        </li>
+            <li>
+              <FontAwesomeIcon icon={faCalendarDay} />
+              {formatedDate}
+            </li>
 
-        <li>
-          <FontAwesomeIcon icon={faComment} />5 comentários
-        </li>
-      </ul>
+            <li>
+              <FontAwesomeIcon icon={faComment} />
+              {postData.comments} comentários
+            </li>
+          </ul>
+        </>
+      )}
     </PostHeaderContainer>
   )
 }

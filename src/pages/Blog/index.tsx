@@ -16,7 +16,7 @@ export interface IPost {
   number: number
   html_url: string
   comments: number
-  use: {
+  user: {
     login: string
   }
 }
