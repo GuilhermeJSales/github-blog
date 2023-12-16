@@ -50,7 +50,7 @@ export function Blog() {
       ) : (
         <PostsListContainer>
           {posts.map((post) => (
-            <Post key={post.number} post={post} />
+            <Post key={post.number} post={post} body={post.body} />
           ))}
         </PostsListContainer>
       )}

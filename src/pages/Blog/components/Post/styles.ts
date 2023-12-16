@@ -37,11 +37,22 @@ export const PostContainer = styled(Link)`
     }
   }
 
-  p {
+  > p {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font:
+      400 ${({ theme }) => theme.textSizes['text-text-m']} 'Nunito',
+      sans-serif;
+    line-height: 160%;
   }
 `

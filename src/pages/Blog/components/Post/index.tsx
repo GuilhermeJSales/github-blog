@@ -1,12 +1,14 @@
+import ReactMarkdown from 'react-markdown'
 import { IPost } from '../..'
 import { relativeDateFormater } from '../../../../utils/formater'
 import { PostContainer } from './styles'
 
 interface PostProps {
   post: IPost
+  body: string
 }
 
-export function Post({ post }: PostProps) {
+export function Post({ post, body }: PostProps) {
   const formatedDate = relativeDateFormater(post.created_at)
 
   return (
@@ -15,7 +17,9 @@ export function Post({ post }: PostProps) {
         <strong>{post.title}</strong>
         <span>{formatedDate}</span>
       </div>
-      <p>{post.body}</p>
+      <p>
+        <ReactMarkdown>{body}</ReactMarkdown>
+      </p>
     </PostContainer>
   )
 }
