@@ -10,6 +10,13 @@ export const ProfileContainer = styled.section`
   padding: 2rem 2.5rem;
   display: flex;
   gap: 2rem;
+
+  @media (max-width: 44rem) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
 `
 
 export const ProfilePicture = styled.img`
@@ -24,11 +31,25 @@ export const ProfileDetails = styled.div`
   display: flex;
   flex-direction: column;
 
+  @media (max-width: 44rem) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.125rem;
+  }
+
   header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 0.5rem;
+
+    @media (max-width: 44rem) {
+      flex-direction: column;
+      gap: 1.125rem;
+      justify-content: center;
+      align-items: center;
+    }
 
     h1 {
       font-size: ${({ theme }) => theme.textSizes['title-title-l']};
@@ -54,6 +75,10 @@ export const ProfileDetails = styled.div`
       width: 1.25rem;
       height: 1.25rem;
       color: ${({ theme }) => theme.colors['base-label']};
+    }
+
+    @media (max-width: 44rem) {
+      justify-content: center;
     }
   }
 `
